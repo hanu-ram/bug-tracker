@@ -26,13 +26,28 @@ export default function TicketForm() {
     <form className="ticket-form" onSubmit={handleSubmit}>
 
       <div>
-        <label><input className="form-input" type="text" value={title} onChange={e => setTitle(e.target.value)} />Title</label>
+        <label>Title <input className="form-input" type="text" value={title} onChange={e => setTitle(e.target.value)} /></label>
       </div>
 
       <div>
-        <label><input className="form-input" type="textarea" value={description} onChange={e => setDescription(e.target.value)} />Description</label>
+        <label>Description <input className="form-input" type="textarea" value={description} onChange={e => setDescription(e.target.value)} /></label>
       </div>
 
+      <fieldset className="priority-fieldset">
+
+        <legend>priority</legend>
+        {
+          Object.entries(priorityLabels).map(([value, label]) => (
+            <label key={value} className="priority-label">
+              {label}
+              <input type='checkbox' value={value} checked={priority === value} onChange={(e) => setPriority(e.target.value)} />
+            </label>
+          ))
+        }
+
+      </fieldset>
+
+      <button type="submit" className="button" onSubmit={handleSubmit}>Submit</button>
 
     </form>
   );
